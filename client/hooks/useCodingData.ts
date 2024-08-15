@@ -1,28 +1,45 @@
-import { useState, useEffect } from 'react'
-import { getDailyCodingData } from '../apis/codingApi'
-import { DailyCodingData } from '../apis/codingApi'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getDailyCodingData, saveDailyCodingData } from '../apis/codingApi'
+import type { DailyCodingData } from '../apis/codingApi'
 
-const useCodingData = () => {
-  const [data, setData] = useState<DailyCodingData[]>([])
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+export function useCodingData() {
+  const queryClient = useQueryClient()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-      const data = await getDailyCodingData()
-      setData(data)
-      } catch (err) {
-      setError((err as Error).message)
-      } finally {
-      setIsLoading(false)
-      }
-      }
-  
-      fetchData()
-  }, [])
+  const query = useQuery({
+    queryKey: ['codingData'],
+    queryFn: getDailyCodingData,
+  })
 
-  return { data, error, isLoading }
+  const mutation = useMutation({
+    mutationFn: saveDailyCodingData,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['codingData'] })
+    },
+  })
+
+  const updateCodingHours = async (dayData: DailyCodingData) => {
+    await mutation.mutateAsync(dayData)
+  }
+
+  const getMotivationalMessage = () => {
+    if (!query.data) return ''
+
+    const codingDays = query.data.filter(day => day.hours > 0).length
+
+    if (codingDays === 0) return 'Never too late to start!'
+    if (codingDays === 1) return 'Off to a good start!'
+    if (codingDays >= 2 && codingDays <= 5) return `${codingDays} in a row! You are amazing!`
+    if (codingDays === 7) return 'You are a coding star!'
+
+    return ''
+  }
+
+  return {
+    codingData: query.data ?? [],
+    isLoading: query.isLoading,
+    isError: query.isError,
+    error: query.error,
+    updateCodingHours,
+    getMotivationalMessage,
+  }
 }
-
-export default useCodingData

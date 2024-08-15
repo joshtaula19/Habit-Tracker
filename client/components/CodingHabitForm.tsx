@@ -1,47 +1,65 @@
-import React, { useState } from 'react'
-import { saveDailyCodingData } from '../apis/codingApi'
+import { useState } from 'react'
+import { useCodingData } from '../hooks/useCodingData'
 
-type CodingHabitFormProps = {
-  onSuccess: () => void
-  onError: (error: string) => void
-}
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-const CodingHabitForm: React.FC<CodingHabitFormProps> = ({ onSuccess, onError }) => {
-  const [date, setDate] = useState('')
-  const [hours, setHours] = useState(0)
+function CodingHabitForm() {
+  const { updateCodingHours, getMotivationalMessage } = useCodingData()
+  const [hours, setHours] = useState<{ [key: string]: number }>({
+    Monday: 0,
+    Tuesday: 0,
+    Wednesday: 0,
+    Thursday: 0,
+    Friday: 0,
+    Saturday: 0,
+    Sunday: 0,
+  })
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  function handleHoursChange(day: string, value: number){
+    setHours((prevHours) => ({
+      ...prevHours,
+      [day]: value,
+    }))
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     try {
-      await saveDailyCodingData({ date, hours })
-      onSuccess()
+      await Promise.all(
+        daysOfWeek.map(async (day) => {
+          if (hours[day] > 0) {
+            await updateCodingHours({ date: day, hours: hours[day] })
+          }
+        })
+      )
     } catch (error) {
-      onError('Failed to save coding data')
+      console.error('Failed to save coding data')
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Date:
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Hours:
-        <input
-          type="number"
-          value={hours}
-          onChange={(e) => setHours(Number(e.target.value))}
-          required
-          min="0"
-        />
-      </label>
+      {daysOfWeek.map((day) => (
+        <div key={day}>
+          <label>
+            {day}:
+            <select
+              value={hours[day]}
+              onChange={(e) => handleHoursChange(day, Number(e.target.value))}
+              required
+            >
+              <option value="0">Select hours</option>
+              {[...Array(13).keys()].map((hour) => (
+                <option key={hour} value={hour}>
+                  {hour} hour{hour !== 1 && 's'}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      ))}
       <button type="submit">Save</button>
+      <p>{getMotivationalMessage()}</p>
     </form>
   )
 }

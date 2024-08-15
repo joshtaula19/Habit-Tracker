@@ -1,6 +1,5 @@
-export interface CodingHabitFormData {
-  habitName: string;
-  frequency: string[];
-  goal: number;
-  startDate: Date;
+export type DailyCodingData = {
+  id?: number
+  date: string
+  hours: number
 }
