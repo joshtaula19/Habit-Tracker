@@ -9,7 +9,7 @@ export function up(knex) {
     table.string('weekday')
     table.boolean('completed')
   })
-  .createTable('coding_habits', (table) => {
+  .createTable('coding_habit', (table) => {
     table.increments('id').primary();
     table.date('date').notNullable();
     table.integer('hours').notNullable();
@@ -23,5 +23,5 @@ export function up(knex) {
 export function down(knex) {
   return knex.schema
   .dropTable('drinkwater')
-  .dropTable('coding_habits')
+  .dropTable('coding_habit')
 }

@@ -1,6 +1,6 @@
 import express from 'express'
 import * as Path from 'node:path'
-import codingHabits from './routes/codingHabits.ts'
+import codingHabits from './routes/codingHabit.ts'
 import waterRoutes from './routes/waterroutes.ts'
 
 const server = express()
