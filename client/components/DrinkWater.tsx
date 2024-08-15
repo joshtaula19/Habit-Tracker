@@ -9,17 +9,16 @@ export default function DrinkWaterTracker() {
 
   return (
     <div className="drink-water">
-      <h2>Drink Water</h2>
-      <div className="water-grid">
+      <h2 className="mb-4 text-xl">Drink Water</h2>
+      <div className="grid-col-7 grid">
         {waterData.map((dayData) => (
           <div key={dayData.id} className="water-day-data">
-            <span>{dayData.weekday}</span>
             <button
               onClick={() => toggleDay(dayData)}
               className="drink-water-button"
             >
               <GlassWater
-                size={36}
+                size={22}
                 className="drink-water-icon"
                 color={dayData.completed ? '#3b82f6' : '#d1d5db'}
                 fill={dayData.completed ? '#3b82f6' : 'none'}
