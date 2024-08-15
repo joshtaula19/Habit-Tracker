@@ -8,24 +8,27 @@ export default function DrinkWaterTracker() {
   if (isError) return <div>Error: {error?.message}</div>
 
   return (
-    <div className="drink-water">
-      <div className="flex flex-row justify-around">
-        {waterData.map((dayData) => (
-          <div key={dayData.id} className="">
-            <button
-              onClick={() => toggleDay(dayData)}
-              className="drink-water-button"
-            >
-              <GlassWater
-                size={36}
-                className="drink-water-icon"
-                color={dayData.completed ? '#3b82f6' : '#d1d5db'}
-                fill={dayData.completed ? '#3b82f6' : 'none'}
-              />
-            </button>
+    <div className="flex flex-row justify-around">
+      {waterData.map((dayData) => (
+        <div key={dayData.id} className="flex flex-col items-center">
+          <div className="grid grid-cols-2 gap-2">
+            {[0, 1, 2, 3].map((glassIndex) => (
+              <button
+                key={glassIndex}
+                onClick={() => toggleDay(dayData)}
+                className="m-1"
+              >
+                <GlassWater
+                  size={30}
+                  className="pr-1"
+                  color={dayData.completed ? '#3b82f6' : '#d1d5db'}
+                  fill={dayData.completed ? '#3b82f6' : 'none'}
+                />
+              </button>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   )
 }

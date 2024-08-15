@@ -22,7 +22,7 @@ export default function WeekGrid() {
           ))}
         </div>
         {/* insert components here */}
-        <DrinkWaterTracker days={days} />
+        <DrinkWaterTracker />
       </div>
     </div>
   )
