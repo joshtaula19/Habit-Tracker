@@ -18,9 +18,7 @@
     "build:server": "esbuild --packages=external --platform=node --format=esm --outfile=dist/server.js --bundle server/index.ts",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "knex": "knex --knexfile ./server/db/knexfile.js",
-    "format": "prettier -w '**/*.{js,jsx,ts,tsx}'",
-    "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
-    "seed": "node -r esm ./node_modules/.bin/knex seed:run"
+    "format": "prettier -w '**/*.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": "@devacademy/eslint-config/react",
