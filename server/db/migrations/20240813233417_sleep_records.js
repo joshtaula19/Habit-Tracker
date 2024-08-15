@@ -5,7 +5,7 @@ export async function up(knex) {
     table.string('user_id')
     table.date('sleep_date')
     table.time('sleep_start')
-    table.time('sleep_end')
+    table.datetime('sleep_end')
     table.boolean('rested')
   })
 };
