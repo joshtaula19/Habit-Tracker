@@ -1,6 +1,8 @@
+import SleepTracker from "./SleepTracker"
 import WeekGrid from './WeekGrid.tsx'
 
 function App() {
+
   return (
     <>
       <div className="app">
@@ -13,6 +15,7 @@ function App() {
           Drink Water Daily: minimum 4 glasses per day
         </p>
         <WeekGrid />
+        <SleepTracker></SleepTracker>
       </div>
     </>
   )
