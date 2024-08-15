@@ -9,8 +9,7 @@ export default function DrinkWaterTracker() {
 
   return (
     <div className="drink-water">
-      <h2 className="mb-4 text-xl">Drink Water</h2>
-      <div className="grid-col-7 grid">
+      <div className="grid grid-cols-7">
         {waterData.map((dayData) => (
           <div key={dayData.id} className="water-day-data">
             <button
