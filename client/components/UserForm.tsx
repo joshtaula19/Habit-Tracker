@@ -3,8 +3,8 @@ import { UserFormProps } from '../../models/sleepTrackerTypes';
 
 export default function UserForm({ onSave }: UserFormProps) {
   const nameInput = useFormInput('');
-  const targetSleepHoursInput = useFormInput('8');  // Initialized with a string
-  const targetSleepMinutesInput = useFormInput('0');  // Initialized with a string
+  const targetSleepHoursInput = useFormInput('');  // Initialized with a string
+  const targetSleepMinutesInput = useFormInput('');  // Initialized with a string
 
   const handleSubmit = () => {
     onSave(
