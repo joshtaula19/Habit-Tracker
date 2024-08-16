@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <>
+    <div>
       <div className="app">
         <h1 className="text-3xl font-bold underline">Habit Tracker</h1>
         <h2 className="text-med border-black-200 block rounded-lg border p-6">

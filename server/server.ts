@@ -10,33 +10,10 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/v1/watertracker', waterRoutes)
-server.use('/api/v1/fruits', fruitRoutes)
 
-<<<<<<< HEAD
-// POST /users
-||||||| parent of f2ba4f1 (update version)
+
 // Add Api routes here
 
-// POST /users
-// server.post('/users', async (req, res) => {
-//   const { name } = req.body;
-  
-//   try {
-//     await connection('users').insert({
-//       name,
-//       target_sleep: 450 // Manually set for testing
-//     });
-//     res.status(201).json({ message: 'User created successfully' });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error creating user', error });
-//   }
-// });
-
-// POST /users
-=======
-// Add Api routes here
-
->>>>>>> f2ba4f1 (update version)
 server.post('/users', async (req, res) => {
   const { name, targetSleepHours, targetSleepMinutes } = req.body;
 
