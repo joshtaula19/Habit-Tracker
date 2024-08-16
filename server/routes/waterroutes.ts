@@ -19,9 +19,7 @@ router.get('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const id = parseInt(req.params.id)
-  console.log('test:', id)
   const { completed } = req.body
-
   if (completed === undefined) {
     return res.status(400).json({ message: 'completed status is required' })
   }
@@ -30,7 +28,6 @@ router.patch('/:id', async (req, res) => {
     const updateData: Pick<DrinkWater, 'id' | 'completed'> = { id, completed }
 
     const updatedDrinkWater = await db.updateDrinkWater(updateData)
-    console.log('testing updatedrinkwater', updatedDrinkWater)
     if (!updatedDrinkWater) {
       return res
         .status(404)
