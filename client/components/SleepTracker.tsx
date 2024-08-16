@@ -7,7 +7,7 @@ import { calculateSleepDuration } from '../../utils/calculateSleepDuration';
 import { SleepRecord } from '../../models/sleepTrackerTypes';
 
 function SleepTracker() {
-  const { sleepRecords, submitSleepRecord } = useSubmitSleepRecord();
+  const { submitSleepRecord } = useSubmitSleepRecord();
   const { data: existingSleepRecords, pending, error } = useFetch('/sleep-records');
 
   const handleSaveUser = async (name: string, targetSleepHours: number, targetSleepMinutes: number) => {

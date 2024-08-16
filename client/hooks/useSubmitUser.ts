@@ -1,3 +1,4 @@
+// hooks/useSubmitUser.ts
 import { useState } from 'react';
 
 function useSubmitUser() {
@@ -25,10 +26,15 @@ function useSubmitUser() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
-      // Handle the result if necessary
+      const responseText = await response.text(); 
+      if (!responseText) {
+        throw new Error('Empty response');
+      }
+
+      return response; // Ensure to return the response object
     } catch (error) {
-      setError(error instanceof Error ? error.message : String(error));
+      setError(error instanceof Error ? error.message : String(error)); // Set error message
+      throw error; // Re-throw the error to handle it in the component
     } finally {
       setPending(false);
     }

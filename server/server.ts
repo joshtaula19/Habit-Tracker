@@ -2,14 +2,11 @@ import express from 'express'
 import * as Path from 'node:path'
 import connection from './db/connection.ts'
 
-import fruitRoutes from './routes/fruits.ts'
 import knex from 'knex'
 
 const server = express()
 
 server.use(express.json())
-
-server.use('/api/v1/fruits', fruitRoutes)
 
 // Add Api routes here
 
