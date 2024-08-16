@@ -1,3 +1,4 @@
+import CodingHabitForm from './CodingHabitForm.tsx'
 import WeekGrid from './WeekGrid.tsx'
 
 function App() {
@@ -11,8 +12,12 @@ function App() {
       <p className="text-med border-black-200 block rounded-lg border p-6 font-bold">
         Drink Water Daily: minimum 4 glasses per day
       </p>
-      <WeekGrid />
+      <WeekGrid />    
+      <div>
+      <CodingHabitForm />
     </div>
+    </div>
+
   )
 }
 
