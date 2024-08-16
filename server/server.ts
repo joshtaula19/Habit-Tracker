@@ -3,7 +3,6 @@ import * as Path from 'node:path'
 import connection from './db/connection.ts'
 
 import waterRoutes from './routes/waterroutes.ts'
-import fruitRoutes from './routes/fruits.ts'
 import knex from 'knex'
 
 const server = express()

@@ -1,5 +1,5 @@
 export type UserFormProps = {
-  onSave: (name: string, targetSleepHours: number, targetSleepMinutes: number) => void;
+  onSave: (name: string, targetSleepHours: number, targetSleepMinutes: number) => Promise<void>;
 };
 
 export type SleepRecordFormProps = {
@@ -22,3 +22,4 @@ export type SleepRecordsTableProps = {
   pending: boolean;
   error: string | null;
 };
+

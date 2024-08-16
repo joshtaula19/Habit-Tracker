@@ -1,21 +1,25 @@
-import useFormInput from '../hooks/useFormInput';
 import { UserFormProps } from '../../models/sleepTrackerTypes';
-import useSubmitUser from '../hooks/useSubmitUser'
+import useFormInput from '../hooks/useFormInput';
+import useSubmitUser from '../hooks/useSubmitUser';
 
-export default function UserForm() {
+export default function UserForm({ onSave }: UserFormProps) {
   const nameInput = useFormInput('');
-  const targetSleepHoursInput = useFormInput('');  // Initialized with a string
-  const targetSleepMinutesInput = useFormInput('');  // Initialized with a string
+  const targetSleepHoursInput = useFormInput<number>(0);  // Initialized with a number
+  const targetSleepMinutesInput = useFormInput<number>(0);  // Initialized with a number
 
-  const { submitUser, pending, error } = useSubmitUser()
+  const { pending, error } = useSubmitUser();
 
-  const handleSubmit = () => {
-    submitUser(
-      nameInput.value,
-      parseInt(targetSleepHoursInput.value, 10),  // Convert to number
-      parseInt(targetSleepMinutesInput.value, 10)  // Convert to number
-    );
-  };
+  const handleSubmit = async () => {
+    const name = nameInput.value;
+    const targetSleepHours = parseInt(targetSleepHoursInput.value.toString(), 10);
+    const targetSleepMinutes = parseInt(targetSleepMinutesInput.value.toString(), 10);
+
+    try {
+      await onSave(name, targetSleepHours, targetSleepMinutes);
+    } catch (error) {
+      console.error('Submission error:', error);
+    }
+  }
 
   return (
     <div>
@@ -30,4 +34,3 @@ export default function UserForm() {
     </div>
   );
 }
-
