@@ -4,7 +4,7 @@ import * as db from '../db/db'
 const router = Router()
 
 // Get all habits
-router.get('/habits', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const habits = await db.getHabits()
     res.json(habits)
@@ -25,7 +25,7 @@ router.get('/habits/:habitId/weekdays', async (req, res) => {
 })
 
 // Add a new habit
-router.post('/habits', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name } = req.body
     const newHabit = await db.addHabit(name)
@@ -71,7 +71,7 @@ router.delete('/habit_weekdays/:id', async (req, res) => {
 })
 
 // Remove a habit
-router.delete('/habits/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
     await db.removeHabit(Number(id))

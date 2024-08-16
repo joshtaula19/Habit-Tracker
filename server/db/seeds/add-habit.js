@@ -4,7 +4,7 @@
  */
 export const seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('habit_weekdays').del() // Ensure dependencies are deleted first
+  await knex('habit_weekdays').del()
   await knex('habits').del()
 
   // Inserts seed entries
