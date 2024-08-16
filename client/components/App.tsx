@@ -1,7 +1,22 @@
-import SleepTracker from "./SleepTracker"
+import { useState } from 'react';
+import SleepTracker from './SleepTracker';
 import WeekGrid from './WeekGrid.tsx'
 
 function App() {
+  const [activeTracker, setActiveTracker] = useState<string | null>(null);
+
+  const handleTrackerClick = (tracker: string) => {
+    setActiveTracker(prevTracker => (prevTracker === tracker ? null : tracker));
+  };
+
+  const renderTracker = () => {
+    switch (activeTracker) {
+      case 'sleep':
+        return <SleepTracker />;
+      default:
+        return <p>Please select a habit tracker to view.</p>;
+    }
+  };
 
   return (
     <>
@@ -17,8 +32,9 @@ function App() {
         <WeekGrid />
         <SleepTracker></SleepTracker>
       </div>
-    </>
-  )
+      <div className="mt-6 w-full">{renderTracker()}</div>
+    </div>
+  );
 }
 
-export default App
+export default App;
