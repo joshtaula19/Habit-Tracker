@@ -1,22 +1,24 @@
 import { useState } from 'react';
-import { SleepRecord } from '../../models/sleepTrackerTypes';
 
-function useSubmitSleepRecord() {
-  const [sleepRecords, setSleepRecords] = useState<SleepRecord[]>([]);
+function useSubmitUser() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const submitSleepRecord = async (sleepRecord: SleepRecord) => {
+  const submitUser = async (name: string, targetSleepHours: number, targetSleepMinutes: number) => {
     setPending(true);
     setError(null);
 
     try {
-      const response = await fetch('/sleep-records', {
+      const response = await fetch('/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sleepRecord),
+        body: JSON.stringify({
+          name,
+          targetSleepHours,
+          targetSleepMinutes,
+        }),
       });
 
       if (!response.ok) {
@@ -24,8 +26,7 @@ function useSubmitSleepRecord() {
       }
 
       const result = await response.json();
-
-      setSleepRecords([...sleepRecords, sleepRecord]);
+      // Handle the result if necessary
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     } finally {
@@ -34,11 +35,10 @@ function useSubmitSleepRecord() {
   };
 
   return {
-    sleepRecords,
-    submitSleepRecord,
+    submitUser,
     pending,
     error,
   };
 }
 
-export default useSubmitSleepRecord;
+export default useSubmitUser;
