@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as db from '../db/db'
+import { DrinkWater } from '../../models/drinkWater'
 
 const router = Router()
 
@@ -18,25 +19,21 @@ router.get('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const id = parseInt(req.params.id)
-  console.log('test:', id)
   const { completed } = req.body
-
   if (completed === undefined) {
     return res.status(400).json({ message: 'completed status is required' })
   }
 
   try {
-    const updateDrinkWater = await db.updateDrinkWater({
-      id,
-      completed,
-    })
-    console.log('testing updatedrinkwater', updateDrinkWater)
-    if (!updateDrinkWater) {
+    const updateData: Pick<DrinkWater, 'id' | 'completed'> = { id, completed }
+
+    const updatedDrinkWater = await db.updateDrinkWater(updateData)
+    if (!updatedDrinkWater) {
       return res
         .status(404)
         .json({ message: 'Drink Water entry not found mate' })
     }
-    res.json(updateDrinkWater)
+    res.json(updatedDrinkWater)
   } catch (error) {
     console.log(error)
     res

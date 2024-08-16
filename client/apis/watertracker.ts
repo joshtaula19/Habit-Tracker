@@ -9,10 +9,12 @@ export async function getDrinkWater(): Promise<DrinkWater[]> {
 }
 
 export async function updateDrinkWater(
-  updateDay: DrinkWater,
+  updateDay: Partial<DrinkWater>,
 ): Promise<DrinkWater> {
   const response = await request
     .patch(rootUrl + `/watertracker/${updateDay.id}`)
-    .send(updateDay)
+    .send({
+      completed: updateDay.completed,
+    })
   return response.body
 }
