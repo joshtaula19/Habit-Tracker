@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getDrinkWater, updateDrinkWater } from '../apis/watertracker'
+import { getDrinkWater, updateDrinkWater } from '../apis/waterTracker'
 import { DrinkWater } from '../../models/drinkWater'
 
 export function useDrinkWater() {
