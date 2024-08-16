@@ -24,7 +24,7 @@ export default function WeekGrid() {
           ))}
         </div>
         {/* Insert components here */}
-        <DrinkWaterTracker days={days} />
+        <DrinkWaterTracker />
         <div className="mt-4">
           <h2 className="text-xl font-bold">Manage Habits</h2>
           <AddHabitForm />
