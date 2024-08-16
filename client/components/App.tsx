@@ -12,11 +12,12 @@ function App() {
       <p className="text-med border-black-200 block rounded-lg border p-6 font-bold">
         Drink Water Daily: minimum 4 glasses per day
       </p>
-      <WeekGrid />
-    </div>
-    <div>
+      <WeekGrid />    
+      <div>
       <CodingHabitForm />
     </div>
+    </div>
+
   )
 }
 
