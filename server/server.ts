@@ -3,13 +3,19 @@ import * as Path from 'node:path'
 import connection from './db/connection.ts'
 
 import waterRoutes from './routes/waterroutes.ts'
+<<<<<<< HEAD
 import knex from 'knex'
+||||||| 2449da0
+=======
+import habitRoutes from './routes/add-habit-routes.ts'
+>>>>>>> f30add8076800c25111ad58bc561d0e32290a4c7
 
 const server = express()
 
 server.use(express.json())
 
 server.use('/api/v1/watertracker', waterRoutes)
+server.use('/api/v1/habits', habitRoutes)
 
 
 // Add Api routes here
