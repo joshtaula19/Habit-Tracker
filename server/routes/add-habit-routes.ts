@@ -47,28 +47,28 @@ router.patch('/habits/:id', async (req, res) => {
   }
 })
 
-// Add a weekday to a habit
-router.post('/habits/:habitId/weekdays', async (req, res) => {
-  try {
-    const { habitId } = req.params
-    const { weekday } = req.body
-    const newWeekday = await db.addHabitWeekday(Number(habitId), weekday)
-    res.status(201).json(newWeekday)
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to add weekday to habit' })
-  }
-})
+// // Add a weekday to a habit
+// router.post('/habits/:habitId/weekdays', async (req, res) => {
+//   try {
+//     const { habitId } = req.params
+//     const { weekday } = req.body
+//     const newWeekday = await db.addHabitWeekday(Number(habitId), weekday)
+//     res.status(201).json(newWeekday)
+//   } catch (err) {
+//     res.status(500).json({ error: 'Failed to add weekday to habit' })
+//   }
+// })
 
-// Remove a weekday from a habit
-router.delete('/habit_weekdays/:id', async (req, res) => {
-  try {
-    const { id } = req.params
-    await db.removeHabitWeekday(Number(id))
-    res.status(204).end()
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to remove weekday from habit' })
-  }
-})
+// // Remove a weekday from a habit
+// router.delete('/habit_weekdays/:id', async (req, res) => {
+//   try {
+//     const { id } = req.params
+//     await db.removeHabitWeekday(Number(id))
+//     res.status(204).end()
+//   } catch (err) {
+//     res.status(500).json({ error: 'Failed to remove weekday from habit' })
+//   }
+// })
 
 // Remove a habit
 router.delete('/:id', async (req, res) => {

@@ -8,19 +8,21 @@ const HabitList: React.FC = () => {
   if (error) return <p>Error: {error}</p>
 
   return (
-    <ul className="list-disc pl-5">
-      {habits.map((habit) => (
-        <li key={habit.id} className="flex items-center justify-between">
-          {habit.name}
-          <button
-            onClick={() => deleteHabit(habit.id)}
-            className="rounded bg-red-500 p-1 text-white"
-          >
-            Remove
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="mt-4 list-disc pl-5">
+        {habits.map((habit) => (
+          <li key={habit.id} className="flex items-center justify-between">
+            {habit.name}
+            <button
+              onClick={() => deleteHabit(habit.id)}
+              className="rounded bg-red-500 p-1 text-white"
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
