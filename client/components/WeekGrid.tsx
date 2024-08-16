@@ -1,4 +1,6 @@
 import DrinkWaterTracker from './DrinkWater'
+import AddHabitForm from './add-habits'
+import HabitList from './HabitList'
 
 const days = [
   'Monday',
@@ -21,8 +23,13 @@ export default function WeekGrid() {
             </div>
           ))}
         </div>
-        {/* insert components here */}
+        {/* Insert components here */}
         <DrinkWaterTracker />
+        <div className="mt-4">
+          <h2 className="text-xl font-bold">Manage Habits</h2>
+          <AddHabitForm />
+          <HabitList />
+        </div>
       </div>
     </div>
   )
