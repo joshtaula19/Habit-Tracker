@@ -1,7 +1,7 @@
 import express from 'express'
 import * as Path from 'node:path'
 
-import waterRoutes from './routes/waterroutes.ts'
+import waterRoutes from './routes/waterroutes'
 
 const server = express()
 
