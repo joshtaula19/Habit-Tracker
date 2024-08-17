@@ -1,14 +1,11 @@
 import express from 'express'
 import * as Path from 'node:path'
-import codingHabits from './routes/codingHabit.ts'import connection from './db/connection.ts'
+import codingHabits from './routes/codingHabit.ts'
+import connection from './db/connection.ts'
 
 import waterRoutes from './routes/waterroutes.ts'
-<<<<<<< HEAD
 import knex from 'knex'
-||||||| 2449da0
-=======
 import habitRoutes from './routes/add-habit-routes.ts'
->>>>>>> f30add8076800c25111ad58bc561d0e32290a4c7
 
 const server = express()
 
@@ -68,7 +65,7 @@ server.post('/sleep-records', async (req, res) => {
 
 server.get('/check-schema', async (req, res) => {
   try {
-    const columns = await knex('users')
+    const columns = await connection('users')
     res.status(200).json(columns);
   } catch (error) {
     res.status(500).json({ message: 'Error checking schema', error });
