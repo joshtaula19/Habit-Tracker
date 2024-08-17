@@ -1,6 +1,6 @@
 import express from 'express'
 import * as Path from 'node:path'
-import connection from './db/connection.ts'
+import codingHabits from './routes/codingHabit.ts'import connection from './db/connection.ts'
 
 import waterRoutes from './routes/waterroutes.ts'
 <<<<<<< HEAD
@@ -15,6 +15,7 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/v1/watertracker', waterRoutes)
+server.use('/api/v1/coding-habit', codingHabits)
 server.use('/api/v1/habits', habitRoutes)
 
 
